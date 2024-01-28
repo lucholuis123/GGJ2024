@@ -1,0 +1,181 @@
+.show-description {
+    @media (orientation: landscape){
+        height: 70vh;
+    }
+    @media (orientation: portrait){
+        height: 63vh;
+    }
+    width: 100vw;
+    color: white;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-image: url('/assets/img/home-screen.png');
+    background-position: center center;
+    background-size: cover;
+
+    .description-container {
+        width: 100vw;
+        height: 25vh;
+        @media (orientation: landscape){
+            margin-top: calc(40vh - 40px);
+        }
+        @media (orientation: portrait){
+            margin-top: calc(20vh - 40px);
+        }
+        padding: 20px;
+        z-index: 1000;
+
+        .show-title {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            background-color: rgba(0, 0, 0, 0.95);
+            width: fit-content;
+            padding-right: 10px;
+        }
+
+        .show-subtitle {
+            font-size: 1rem;
+            width: calc(100vw - 40px);
+            margin-bottom: 20px;
+            font-weight: 400;
+            background-color: rgba(0, 0, 0, 0.95);
+            max-width: 70%;
+        }
+
+        .home-action-buttons {
+            width: calc(100vw - 40px);
+        }
+    }
+}
+
+.custom-button {
+    &.home-screen-button {
+        background-color: #C8102E;
+        text-align: left;
+        padding: 10px;
+        color: white;
+        font-size: 1rem;
+        font-weight: 600;
+
+        &:first-child {
+            margin-right: 10px;
+            width: fit-content;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-bottom: 5px;
+        }
+
+        &:not(:first-child) {
+            width: fit-content;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        &:active{
+            background-color: #5f0817;
+        }
+        &:hover{
+            transform: scale(1.05);
+        }
+    }
+}
+
+.show-actions{
+    position: absolute;
+    @media (orientation: landscape){
+        top: 70vh;
+    }
+    @media (orientation: portrait){
+        top: 63vh;
+    }
+    background-color: black;
+    left: 0px;
+    width: 100vw;
+}
+
+.chapter-container{
+    background-color: rgba(255, 255, 255, 0.9);
+    @media (orientation: landscape){
+        width: calc(100vw - 200px);
+        height: 200px;
+        margin-left: 100px;
+    }
+    @media (orientation: portrait){
+        width: calc(100vw - 40px);
+        height: 400px;
+        margin-left: 10px;
+    }
+    margin-top: 10px;
+    color: rgb(48, 48, 48);
+    padding: 10px;
+    border-radius: 5px;
+    &:last-child{
+        margin-bottom: 10px;
+    }
+    .thumbnail{
+        @media (orientation: landscape){
+            width: 355px;
+            height: 200px;
+        }
+        @media (orientation: portrait){
+            width: calc(100%);
+            height: 200px;
+        }
+
+        float: left;
+        background-position: center center;
+        background-size: cover;
+        color: rgba(255, 255, 255, 0.516);
+        font-size: 3rem;
+        text-align: center;
+        .play-icon{
+            margin-top: calc(100px - 1.5rem);
+            width: 100%;
+        }
+        &.unlocked{
+            &:hover{
+                color: white;
+                cursor: pointer;
+                transform: scale(1.02)
+            }
+        }
+    }
+    .description{
+        @media (orientation: landscape){
+            width: 60%;
+        }
+        @media (orientation: portrait){
+            width: 80%;
+        }
+        width: 60%;
+        float: left;
+        padding-left: 10px;
+        .chapter-title{
+            @media (orientation: landscape){
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+            @media (orientation: portrait){
+                font-size: 1.2rem;
+                font-weight: 600;
+                margin-bottom: 10px;
+            }
+            margin-top: 10px;
+        }
+        .chapter-subtitle{
+            font-size: 1rem;
+        }
+    }
+}
+
+.home{
+ width: 100vw;
+ overflow-x: hidden;
+ overflow-y: scroll;
+ height: 100vh;
+ position: absolute;
+ left: 0px;
+ top:0px;
+}

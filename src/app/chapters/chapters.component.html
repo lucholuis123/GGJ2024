@@ -1,0 +1,93 @@
+<div class="main-container">
+    <div class="game-title-container" *ngIf="isDisplayingTitle">
+        <div class="game-title">El Hazmereir</div>
+        <div class="game-subtitle">Capítulo 1: La Medium</div>
+        <div class="game-start" (click)="playGame()">Continuar >> </div>
+    </div>
+    <div class="game-play-container" *ngIf="isPlaying">
+        <div class="characters-list">
+            <div class="next-character">
+                <div class="img-back"></div>
+                <div class="img-char-container"><img
+                        [src]="'assets/img/' + charactersList[currentCharPointer % (charactersList.length)].characterImg"
+                        class="next-character-image"></div>
+                <div class="title">{{charactersList[currentCharPointer % (charactersList.length)].name}}</div>
+                <div class="indicator" *ngIf="charactersList[(currentCharPointer) % (charactersList.length)].energy">
+                    Energía: {{charactersList[currentCharPointer % (charactersList.length)].energy}}</div>
+                <div class="indicator" *ngIf="charactersList[(currentCharPointer) % (charactersList.length)].ganas">
+                    Ganas: {{charactersList[currentCharPointer % (charactersList.length)].ganas}}</div>
+                <div class="indicator">Defensa: {{charactersList[currentCharPointer % (charactersList.length)].defense}}
+                </div>
+            </div>
+            <div class="next-character">
+                <div class="img-back"></div>
+                <div class="img-char-container"><img
+                        [src]="'assets/img/' + charactersList[(currentCharPointer + 1) % (charactersList.length)].characterImg"
+                        class="next-character-image"></div>
+                <div class="title">{{charactersList[(currentCharPointer + 1) % (charactersList.length)].name}}</div>
+                <div class="indicator"
+                    *ngIf="charactersList[(currentCharPointer + 1) % (charactersList.length)].energy">Energía:
+                    {{charactersList[(currentCharPointer + 1) % (charactersList.length)].energy}}</div>
+                <div class="indicator" *ngIf="charactersList[(currentCharPointer + 1) % (charactersList.length)].ganas">
+                    Ganas: {{charactersList[(currentCharPointer + 1) % (charactersList.length)].ganas}}</div>
+                <div class="indicator">Defensa: {{charactersList[(currentCharPointer + 1) %
+                    (charactersList.length)].defense}}</div>
+            </div>
+            <div class="next-character">
+                <div class="img-back"></div>
+                <div class="img-char-container"><img
+                        [src]="'assets/img/' + charactersList[(currentCharPointer + 2) % (charactersList.length)].characterImg"
+                        class="next-character-image"></div>
+                <div class="title">{{charactersList[(currentCharPointer + 2) % (charactersList.length)].name}}</div>
+                <div class="indicator"
+                    *ngIf="charactersList[(currentCharPointer + 2) % (charactersList.length)].energy">Energía:
+                    {{charactersList[(currentCharPointer + 2) % (charactersList.length)].energy}}</div>
+                <div class="indicator" *ngIf="charactersList[(currentCharPointer + 2) % (charactersList.length)].ganas">
+                    Ganas: {{charactersList[(currentCharPointer + 2) % (charactersList.length)].ganas}}</div>
+                <div class="indicator">Defensa: {{charactersList[(currentCharPointer + 2) %
+                    (charactersList.length)].defense}}</div>
+            </div>
+            <div class="next-character">
+                <div class="img-back"></div>
+                <div class="img-char-container"><img
+                        [src]="'assets/img/' + charactersList[(currentCharPointer + 3) % (charactersList.length)].characterImg"
+                        class="next-character-image"></div>
+                <div class="title">{{charactersList[(currentCharPointer + 3) % (charactersList.length)].name}}</div>
+                <div class="indicator"
+                    *ngIf="charactersList[(currentCharPointer + 3) % (charactersList.length)].energy">Energía:
+                    {{charactersList[(currentCharPointer + 3) % (charactersList.length)].energy}}</div>
+                <div class="indicator" *ngIf="charactersList[(currentCharPointer + 3) % (charactersList.length)].ganas">
+                    Ganas: {{charactersList[(currentCharPointer + 3) % (charactersList.length)].ganas}}</div>
+                <div class="indicator">Defensa: {{charactersList[(currentCharPointer + 3) %
+                    (charactersList.length)].defense}}</div>
+            </div>
+        </div>
+        <div class="current-selected-character">
+        </div>
+        <div class="game-play-background">
+            <div *ngFor="let attack of charactersList[(currentCharPointer) % (charactersList.length)].attacks"
+                class="attack-button">
+                {{attack.title}}
+            </div>
+        </div>
+        <div class="attack-description">
+            {{charactersList[(currentCharPointer) % (charactersList.length)].attacks[0].description}}
+        </div>
+    </div>
+    <div class="dialog-container" *ngIf="isDisplayingDialog"><span class="character-name">{{currentDialog.who}}:
+        </span>{{currentDialogString}}
+        <button class="next-button" *ngIf="shouldShowNextButon" (click)="onNextButtonClick()"><fa-icon
+                [icon]=faChevronDown></fa-icon></button>
+    </div>
+    <div class="game-container"
+        [ngStyle]="{'background-image': currentDialog.backgroundImg && isDisplayingDialog ? 'url(\'/assets/img/'+ currentDialog.backgroundImg + '\')' : 'url(\'/assets/img/'+ gameBackground + '\')'}">
+        <img [src]="'assets/img/' + currentDialog.characterImg" class="character-img img-left"
+            *ngIf="currentDialog.where === 'left' && showCharacter">
+        <img [src]="'assets/img/' + currentDialog.characterImg" class="character-img img-rigth"
+            *ngIf="currentDialog.where === 'right' && showCharacter">
+    </div>
+
+    <div class="play-icon" *ngIf="shouldShowPlayButton">
+        <fa-icon [icon]="faCirclePlay" (click)="startGame()"></fa-icon>
+    </div>
+</div>

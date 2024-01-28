@@ -1,0 +1,32 @@
+<div class="home">
+    <div class="show-description">
+        <div class="description-container">
+            <div class="show-title">El Hazmereir</div>
+            <div class="show-subtitle">¡El show de talentos de la televisón colmbiana! Cada semana El Hazmereir muestra
+                los
+                talentos más prominentes y prometedores de Colombia. <br> Con Caro (Carolina Gutierres), Chis (Cristobal
+                Calero) y Kike (Luis Felipe de Las Mercedes) como jueces; y Fernando Fernandez como presentador.
+            </div>
+            <div class="home-action-buttons">
+                <button class="custom-button home-screen-button">Reproducir Capítulo {{latestChapter}}</button>
+                <button class="custom-button home-screen-button"><fa-icon [icon]="faGear"></fa-icon></button>
+            </div>
+        </div>
+    </div>
+    <div class="show-actions" class="show-actions">
+        <div *ngFor="let chapter of allChaptersList; index as i" class="chapter-container">
+            <div class="thumbnail"
+                [ngStyle]="{'background-image': chapter.canPlay ? 'url(\'/assets/img/'+ allChaptersDescriptions[i].imgUrl + '\')': 'url(\'/assets/img/home-screen.png\')'}"
+                [ngClass]="chapter.canPlay ? 'unlocked': ''"
+                (click)="gotoChapter(allChaptersDescriptions[i].url, chapter.canPlay)">
+                <div class="play-icon">
+                    <fa-icon [icon]="faPlay" *ngIf="chapter.canPlay"></fa-icon>
+                </div>
+            </div>
+            <div class="description">
+                <div class="chapter-title">Capítulo {{i + 1}}: {{chapter.canPlay ? allChaptersDescriptions[i].title: '[TBA]'}}</div>
+                {{chapter.canPlay ? allChaptersDescriptions[i].description: '[TBA]'}}
+            </div>
+        </div>
+    </div>
+</div>

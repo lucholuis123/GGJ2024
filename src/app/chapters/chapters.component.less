@@ -1,0 +1,213 @@
+.game-container{
+    height: 100vh;
+    width: 100vw;
+    background-position: center center;
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    .character-img{
+        filter: drop-shadow(0 0.2rem 0.25rem rgb(255, 255, 255));
+        height: 80vh;
+        width: auto;
+        position: absolute;
+        &.img-rigth{
+            right: 5vw;
+        }
+        &.img-left{
+            left: 5vw;
+        }
+    }
+}
+
+.dialog-container{
+    z-index: 1000;
+    background-color: rgba(227, 227, 227, 0.9);
+    position: absolute;
+    bottom: 10px;
+    width: calc(90vw - 40px);
+    left: 5vw;
+    height: 20vh;
+    padding: 20px;
+    @media (orientation: landscape){
+        font-size: 1.5rem;
+    }
+    @media (orientation: portrait){
+        font-size: 1rem;
+    }
+    font-weight: 500;
+    color: rgb(35, 35, 35);
+    border-radius: 10px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgb(35, 35, 35);
+    .character-name{
+        font-weight: 800;
+    }
+    .next-button{
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        height: 40px;
+        width: 40px;
+        font-size: 1.5rem;
+        &:hover{
+            background-color: #C8102E;
+            color: white
+        }
+    }
+}
+
+.play-icon{
+    position: absolute;
+    z-index: 1000;
+    font-size: 5rem;
+    color: rgba(255, 255, 255, 0.662);
+    width: 100vw;
+    text-align: center;
+    height: 5rem;
+    top: calc(50vh - 2.5rem);
+    left: 0px;
+    &:hover{
+        cursor: pointer;
+        color: white;
+        font-size: 6rem
+    };
+}
+
+.main-container{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    user-select: none;
+}
+
+.game-play-container{
+    position: absolute;
+    z-index: 100;
+    width: 100vw;
+    height: 50vh;
+    left: 0px;
+    bottom: 0px;
+    .game-play-background{
+        position: absolute;
+        width: 80vw;
+        height: calc(50vh - 170px);
+        background-color: white;
+        left: 0px;
+        bottom: 0px;
+        float: left;
+    }
+    .attack-description{
+        position: absolute;
+        width: 30vw;
+        height: calc(40vh - 170px);
+        background-color: white;
+        right: 20vw;
+        bottom: 0px;
+        float: left;
+        padding: 20px;
+        font-size: 1.2rem;
+    }
+    .next-character{
+        float: left;
+        height: 150px;
+        width: 120px;
+        background-color: white;
+        margin: 10px;
+        z-index: 1000;
+        border-radius: 10px;
+        &:first-child{
+            transform: scale(1.1);
+        }
+        .title{
+            font-weight: 600;
+            padding: 5px;
+        }
+        .indicator{
+            font-weight: 600;
+            padding-left: 5px;
+            font-size: 12px;
+        }
+        .img-back{
+            background-color: blue;
+            position: absolute;
+            width: 120px;
+            height: 50px;
+            border-radius: 10px 10px 0px 0px;
+        }
+        .img-char-container{
+            width:120px;
+            text-align: center;
+            margin-top: -50px;
+            .next-character-image{
+                width: auto;
+                height: 100px;
+                position:sticky;
+                filter: drop-shadow(0 0.2rem 0.25rem rgb(255, 255, 255));
+            }
+        }
+    }
+}
+
+.attack-button{
+    margin: 10px;
+    width: 40vw;
+    border-width: 3px;
+    font-size: 1.2rem;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    &:hover{
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+}
+.game-title-container{
+    .game-title{
+        position: absolute;
+        top: 35vh;
+        left: 0px;
+        background-color: #FFCD00;
+        z-index: 1000;
+        padding: 20px;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: rgb(0, 0, 0);
+    }
+    .game-subtitle{
+        position: absolute;
+        top: 45vh;
+        left: 0px;
+        background-color: #003087;
+        z-index: 1000;
+        padding: 20px;
+        font-size: 3rem;
+        font-weight: 600;
+        width: 50vw;
+        color: rgb(255, 255, 255);
+    }
+    .game-start{
+        position: absolute;
+        bottom: 5vh;
+        right: -3px;
+        background-color: #C8102E;
+        z-index: 1000;
+        padding: 20px;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: rgb(255, 255, 255); 
+        border-width: 3px;
+        border-style: solid;
+        text-align: right;
+        padding-right: 50px;
+        &:hover{
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+    }
+}
