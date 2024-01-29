@@ -4,7 +4,7 @@
         <div class="game-subtitle">Capítulo 1: La Medium</div>
         <div class="game-start" (click)="playGame()">Continuar >> </div>
     </div>
-    <div class="game-play-container" *ngIf="isPlaying">
+    <div class="game-play-container" *ngIf="isDisplayingDialog">
         <div class="characters-list">
             <div class="next-character">
                 <div class="img-back"></div>
@@ -62,19 +62,17 @@
                     (charactersList.length)].defense}}</div>
             </div>
         </div>
-        <div class="current-selected-character">
-        </div>
         <div class="game-play-background">
             <div *ngFor="let attack of charactersList[(currentCharPointer) % (charactersList.length)].attacks"
-                class="attack-button">
+                class="attack-button" (mouseenter)="setCurrentAttack(attack.description)" (mouseleave)="unsetCurrentAttack()">
                 {{attack.title}}
             </div>
         </div>
-        <div class="attack-description">
-            {{charactersList[(currentCharPointer) % (charactersList.length)].attacks[0].description}}
+        <div class="attack-description" [ngClass]="descriptionClass">
+            {{currentAttackDescription}}
         </div>
     </div>
-    <div class="dialog-container" *ngIf="isDisplayingDialog"><span class="character-name">{{currentDialog.who}}:
+    <div class="dialog-container" *ngIf="!isDisplayingDialog"><span class="character-name">{{currentDialog.who}}:
         </span>{{currentDialogString}}
         <button class="next-button" *ngIf="shouldShowNextButon" (click)="onNextButtonClick()"><fa-icon
                 [icon]=faChevronDown></fa-icon></button>
@@ -82,9 +80,9 @@
     <div class="game-container"
         [ngStyle]="{'background-image': currentDialog.backgroundImg && isDisplayingDialog ? 'url(\'/assets/img/'+ currentDialog.backgroundImg + '\')' : 'url(\'/assets/img/'+ gameBackground + '\')'}">
         <img [src]="'assets/img/' + currentDialog.characterImg" class="character-img img-left"
-            *ngIf="currentDialog.where === 'left' && showCharacter">
+            *ngIf="currentDialog.where === 'left' && !showCharacter">
         <img [src]="'assets/img/' + currentDialog.characterImg" class="character-img img-rigth"
-            *ngIf="currentDialog.where === 'right' && showCharacter">
+            *ngIf="currentDialog.where === 'right' && !showCharacter">
     </div>
 
     <div class="play-icon" *ngIf="shouldShowPlayButton">

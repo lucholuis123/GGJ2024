@@ -1,4 +1,4 @@
-.game-container{
+.game-container {
     height: 100vh;
     width: 100vw;
     background-position: center center;
@@ -7,21 +7,24 @@
     top: 0px;
     left: 0px;
     overflow: hidden;
-    .character-img{
+
+    .character-img {
         filter: drop-shadow(0 0.2rem 0.25rem rgb(255, 255, 255));
         height: 80vh;
         width: auto;
         position: absolute;
-        &.img-rigth{
+
+        &.img-rigth {
             right: 5vw;
         }
-        &.img-left{
+
+        &.img-left {
             left: 5vw;
         }
     }
 }
 
-.dialog-container{
+.dialog-container {
     z-index: 1000;
     background-color: rgba(227, 227, 227, 0.9);
     position: absolute;
@@ -30,36 +33,42 @@
     left: 5vw;
     height: 20vh;
     padding: 20px;
-    @media (orientation: landscape){
+
+    @media (orientation: landscape) {
         font-size: 1.5rem;
     }
-    @media (orientation: portrait){
+
+    @media (orientation: portrait) {
         font-size: 1rem;
     }
+
     font-weight: 500;
     color: rgb(35, 35, 35);
     border-radius: 10px;
     border-width: 5px;
     border-style: solid;
     border-color: rgb(35, 35, 35);
-    .character-name{
+
+    .character-name {
         font-weight: 800;
     }
-    .next-button{
+
+    .next-button {
         position: absolute;
         bottom: 10px;
         right: 10px;
         height: 40px;
         width: 40px;
         font-size: 1.5rem;
-        &:hover{
+
+        &:hover {
             background-color: #C8102E;
             color: white
         }
     }
 }
 
-.play-icon{
+.play-icon {
     position: absolute;
     z-index: 1000;
     font-size: 5rem;
@@ -69,14 +78,17 @@
     height: 5rem;
     top: calc(50vh - 2.5rem);
     left: 0px;
-    &:hover{
+
+    &:hover {
         cursor: pointer;
         color: white;
         font-size: 6rem
-    };
+    }
+
+    ;
 }
 
-.main-container{
+.main-container {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
@@ -86,34 +98,55 @@
     user-select: none;
 }
 
-.game-play-container{
+.game-play-container {
     position: absolute;
     z-index: 100;
     width: 100vw;
     height: 50vh;
     left: 0px;
     bottom: 0px;
-    .game-play-background{
+
+    .game-play-background {
         position: absolute;
-        width: 80vw;
-        height: calc(50vh - 170px);
-        background-color: white;
+        width: 70vw;
+        height: calc(50vh - 180px);
+        background-color: rgb(228, 228, 228);
         left: 0px;
         bottom: 0px;
+        padding-left: 30px;
+        padding-top: 10px;
         float: left;
+        border-radius: 0px 10px 0px 0px;
     }
-    .attack-description{
+
+    .attack-description {
         position: absolute;
         width: 30vw;
         height: calc(40vh - 170px);
-        background-color: white;
-        right: 20vw;
-        bottom: 0px;
+        max-height: calc(40vh - 170px);;
+        background-color: rgba(255, 255, 255, 0.99);
+        right: 25vw;
+        bottom: 15px;
         float: left;
         padding: 20px;
         font-size: 1.2rem;
+        border-radius: 10px;
+
+        &.selected {
+            border-color: #C8102E;
+            border-width: 3px;
+            border-style: solid;
+            font-weight: 600;
+        }
+
+        &.unselected {
+            font-size: 20px;
+            color: rgb(102, 102, 102);
+            font-style: italic;
+        }
     }
-    .next-character{
+
+    .next-character {
         float: left;
         height: 150px;
         width: 120px;
@@ -121,54 +154,70 @@
         margin: 10px;
         z-index: 1000;
         border-radius: 10px;
-        &:first-child{
-            transform: scale(1.1);
+
+        &:first-child {
+            border-color: gold;
+            border-style: solid;
+            border-width: 4px;
+            transform: translateY(-15px) scale(1.1);
+            margin-left: 50px;
         }
-        .title{
+
+        .title {
             font-weight: 600;
             padding: 5px;
         }
-        .indicator{
+
+        .indicator {
             font-weight: 600;
             padding-left: 5px;
             font-size: 12px;
         }
-        .img-back{
+
+        .img-back {
             background-color: blue;
             position: absolute;
             width: 120px;
             height: 50px;
             border-radius: 10px 10px 0px 0px;
         }
-        .img-char-container{
-            width:120px;
+
+        .img-char-container {
+            width: 120px;
             text-align: center;
             margin-top: -50px;
-            .next-character-image{
+
+            .next-character-image {
                 width: auto;
                 height: 100px;
-                position:sticky;
+                position: sticky;
                 filter: drop-shadow(0 0.2rem 0.25rem rgb(255, 255, 255));
             }
         }
     }
 }
 
-.attack-button{
+.attack-button {
     margin: 10px;
-    width: 40vw;
+    width: 35vw;
     border-width: 3px;
     font-size: 1.2rem;
     border-style: solid;
     border-radius: 5px;
     padding: 10px;
-    &:hover{
+    background-color: white;
+    font-weight: 600;
+
+    &:hover {
         transform: scale(1.05);
         cursor: pointer;
+        background-color: #C8102E;
+        color: white;
     }
 }
-.game-title-container{
-    .game-title{
+
+.game-title-container {
+    .game-title {
         position: absolute;
         top: 35vh;
         left: 0px;
@@ -179,7 +228,8 @@
         font-weight: 600;
         color: rgb(0, 0, 0);
     }
-    .game-subtitle{
+
+    .game-subtitle {
         position: absolute;
         top: 45vh;
         left: 0px;
@@ -191,7 +241,8 @@
         width: 50vw;
         color: rgb(255, 255, 255);
     }
-    .game-start{
+
+    .game-start {
         position: absolute;
         bottom: 5vh;
         right: -3px;
@@ -200,12 +251,13 @@
         padding: 20px;
         font-size: 1.5rem;
         font-weight: 600;
-        color: rgb(255, 255, 255); 
+        color: rgb(255, 255, 255);
         border-width: 3px;
         border-style: solid;
         text-align: right;
         padding-right: 50px;
-        &:hover{
+
+        &:hover {
             transform: scale(1.1);
             cursor: pointer;
         }

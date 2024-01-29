@@ -8,7 +8,7 @@
                 Calero) y Kike (Luis Felipe de Las Mercedes) como jueces; y Fernando Fernandez como presentador.
             </div>
             <div class="home-action-buttons">
-                <button class="custom-button home-screen-button">Reproducir Capítulo {{latestChapter}}</button>
+                <button class="custom-button home-screen-button" (click)="gotoChapter('chapters/'+latestChapter, true)">Reproducir Capítulo {{latestChapter}}</button>
                 <button class="custom-button home-screen-button"><fa-icon [icon]="faGear"></fa-icon></button>
             </div>
         </div>

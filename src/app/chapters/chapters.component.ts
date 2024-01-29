@@ -28,6 +28,8 @@ export class ChaptersComponent implements OnInit {
   charactersList: any = [];
   currentCharPointer = 0;
   isPlaying = false;
+  currentAttackDescription = 'Selecciona una acción...';
+  descriptionClass = 'unselected';
 
   images = ['caro-1.png', 'caro-2.png', 'chapter-1.png', 'chris-1.png', 'dioselina-1.png', 'dioselina-1.png', 'fernando-1.png', 'fernando-2.png', 'fernando-3.png', 'kike-1.png', 'kike-2.png', 'set-1.png', 'set-2.png', 'set-3.png', 'set-3.png']
 
@@ -89,6 +91,14 @@ export class ChaptersComponent implements OnInit {
   playGame(){
     this.isDisplayingTitle = false
     this.isPlaying = true
+  }
+  setCurrentAttack(description: string){
+    this.currentAttackDescription = description
+    this.descriptionClass = 'selected'
+  }
+  unsetCurrentAttack(){
+    this.currentAttackDescription = 'Selecciona una acción...'
+    this.descriptionClass = 'unselected'
   }
   playAudio(): void {
     const audio = new Audio();
