@@ -30,6 +30,10 @@ export class ChaptersComponent implements OnInit {
   isPlaying = false;
   currentAttackDescription = 'Selecciona una acción...';
   descriptionClass = 'unselected';
+  currentAttack: any;
+  hasWon = true;
+  showWinningScreen = false;
+  levelTitle = ''
 
   images = ['caro-1.png', 'caro-2.png', 'chapter-1.png', 'chris-1.png', 'dioselina-1.png', 'dioselina-1.png', 'fernando-1.png', 'fernando-2.png', 'fernando-3.png', 'kike-1.png', 'kike-2.png', 'set-1.png', 'set-2.png', 'set-3.png', 'set-3.png']
 
@@ -88,15 +92,32 @@ export class ChaptersComponent implements OnInit {
     this.showCharacter = true;
   }
 
-  playGame(){
+  playGame() {
     this.isDisplayingTitle = false
     this.isPlaying = true
   }
-  setCurrentAttack(description: string){
-    this.currentAttackDescription = description
+  async saveElements() {
+    let chapterList = localStorage.getItem('chapterList')
+    let jsonChapters = JSON.parse(chapterList ? chapterList : '{}')
+    jsonChapters[this.currentChapterId].canPlay = true
+    localStorage.setItem('chapterList', JSON.stringify(jsonChapters))
+    let chapterToSave = String(this.currentChapterId + 1)
+    localStorage.setItem('latestChapter', chapterToSave)
+  }
+  endChapter() {
+    this.saveElements().then(() => {
+      this.router.navigateByUrl('home').then(() => {
+        window.location.reload();
+      });
+    })
+  }
+  setCurrentAttack(attack: any) {
+    console.log(attack.effects)
+    this.currentAttackDescription = attack.description
+    this.currentAttack = attack
     this.descriptionClass = 'selected'
   }
-  unsetCurrentAttack(){
+  unsetCurrentAttack() {
     this.currentAttackDescription = 'Selecciona una acción...'
     this.descriptionClass = 'unselected'
   }
@@ -105,6 +126,59 @@ export class ChaptersComponent implements OnInit {
     audio.src = '../../../assets/sound/main-theme.mp3';
     audio.load();
     audio.play();
+  }
+
+  async checkWinningConditions() {
+    if (this.charactersList[0].energy <= 0 && this.charactersList[1].energy <= 0 && this.charactersList[2].energy <= 0) {
+      return true
+    }
+    if (this.charactersList[3].ganas <= 0) {
+      this.hasWon = false
+      return true
+    }
+    return false
+
+  }
+
+  async doAttack(attack: any) {
+    console.log(attack)
+    if (attack.cost[0].indicator === 'Energía') {
+      if (this.charactersList[this.currentCharPointer].energy + attack.cost[0].to < 0) {
+        this.charactersList[this.currentCharPointer].energy = 0
+      } else {
+        this.charactersList[this.currentCharPointer].energy = this.charactersList[this.currentCharPointer].energy + attack.cost[0].to
+      }
+
+    }
+    if (attack.cost[0].indicator === 'Ganas') {
+      this.charactersList[3].ganas = this.charactersList[3].ganas + attack.cost[0].to
+    }
+
+    if (attack.effects[0].indicator === 'Ganas') {
+      this.charactersList[3].ganas = this.charactersList[3].ganas + attack.cost[0].to
+    }
+    if (attack.effects[0].indicator === 'Energía') {
+      this.charactersList.forEach((element: any, i: number) => {
+        console.log(element)
+        if (i !== this.currentCharPointer && i < 3 && element.energy > 0) {
+          if (element.energy + attack.effects < 0) {
+            element.energy = 0
+          } else {
+            element.energy += attack.effects[0].to
+          }
+        }
+      });
+    }
+    let isWinning = await this.checkWinningConditions()
+    console.log(isWinning)
+    if (isWinning) {
+      this.isPlaying = false;
+      this.showWinningScreen = true;
+    }
+    this.currentCharPointer = (this.currentCharPointer + 1) % this.charactersList.length
+    while (this.charactersList[this.currentCharPointer].energy <= 0) {
+      this.currentCharPointer = (this.currentCharPointer + 1) % this.charactersList.length
+    }
   }
 
   ngOnInit(): void {
@@ -121,17 +195,19 @@ export class ChaptersComponent implements OnInit {
           let chapterList = localStorage.getItem('chapterList')
           let chapterListObject = JSON.parse(chapterList ? chapterList : '[]')
           console.log(chapterListObject[currentChapterId])
-          if (!chapterListObject[currentChapterId]) {
+          if (!chapterListObject[currentChapterId - 1]) {
             this.router.navigateByUrl('home')
-          } else if (!chapterListObject[currentChapterId].canPlay) {
+          } else if (!chapterListObject[currentChapterId - 1].canPlay) {
             this.router.navigateByUrl('home')
           }
         }
       } catch (e) {
         this.router.navigateByUrl('home')
-      } finally{
+      } finally {
+        let allLevelsDescriptions = this.levelsService.getLevelDescriptions()
         this.loadImages().then(() => {
           this.levelInfo = this.levelsService.getLevelInfo(currentChapterId - 1)
+          this.levelTitle = allLevelsDescriptions[this.currentChapterId - 1].title
           this.currentDialog = this.levelInfo.dialogs[this.currentCursor]
           console.log(this.currentDialog)
           this.charactersList = this.levelsService.getCharactersByLevel(currentChapterId - 1)
